@@ -1,40 +1,61 @@
 <template>
   <span>
     {{ titleRender }}
-    <span class="cursor" :class="{ typing: typeStatus }">&nbsp;</span>
+    <span class="cursor" :class="[typingStatus ? 'typing' : '']">&nbsp;</span>
   </span>
 </template>
 <script>
 export default {
   props: {
-    title: {
-      type: String,
+    phrases: {
+      type: Array,
     },
   },
   data() {
     return {
       titleRender: "",
-      titleIterator: 0,
+      phraseIterator: 0,
+      typingStatus: false,
     };
   },
   methods: {
-    typing() {
-      if (this.titleIterator < this.title.length) {
-        this.titleRender += this.title.charAt(this.titleIterator);
-        this.titleIterator++;
-        setTimeout(this.typing, 50);
+    animatePhrase() {
+      let phrase = this.phrases[this.phraseIterator];
+      if (this.titleRender.length < phrase.length) {
+        this.typingStatus = true;
+        this.titleRender += phrase.charAt(this.titleRender.length);
+        setTimeout(this.animatePhrase, 70);
       } else {
-        this.titleIterator = 0;
-        setTimeout(this.erase, 1000);
+        this.typingStatus = false;
+        setTimeout(this.erase, 1200);
       }
+    },
+    typing() {
+      if (this.phraseIterator < this.phrases.length) {
+        this.animatePhrase(this.phraseIterator);
+      } else {
+        this.reset();
+      }
+    },
+    reset() {
+      this.phraseIterator = 0;
+      setTimeout(() => {
+        this.typing();
+      }, 2000);
     },
     erase() {
       if (this.titleRender.length > 0) {
+        this.typingStatus = true;
         this.titleRender = this.titleRender.split("");
         this.titleRender.splice(this.titleRender.length - 1, 1);
         this.titleRender = this.titleRender.join("");
-
         setTimeout(this.erase, 30);
+      } else {
+        this.typingStatus = false;
+        setTimeout(() => {
+          this.phraseIterator++;
+          this.typing();
+        }, 500);
       }
     },
   },
@@ -56,9 +77,12 @@ export default {
 span.cursor {
   display: inline-block;
   margin-left: 3px;
-  width: 4px;
+  width: 3px;
   line-height: 0.9em;
-  background-color: #000;
-  animation: cursorBlink 1s infinite;
+  background-color: grey;
+  animation: cursorBlink 0.8s infinite;
+}
+.typing {
+  animation: none !important;
 }
 </style>

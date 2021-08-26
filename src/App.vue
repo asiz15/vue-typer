@@ -1,7 +1,17 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" width="25%" />
-    <h2>Hi ! <Typer ref="typer" title="This is my text" /></h2>
+    <h2>
+      Hi !
+      <Typer
+        ref="typer"
+        :phrases="[
+          'I love to create things with Vue',
+          'Also love too with React',
+          'And maybe with Pyhton',
+        ]"
+      />
+    </h2>
     <button @click="handleTyping">Type</button>
   </div>
 </template>
