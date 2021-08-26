@@ -1,18 +1,17 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" width="25%" />
-    <h2>
+    <h2 style="display: flex; flex-direction: column">
       Hi !
       <Typer
         ref="typer"
         :phrases="[
           'I love to create things with Vue',
-          'Also love too with React',
-          'And maybe with Pyhton',
+          'Also with React',
+          'And sometimes with Python',
         ]"
       />
     </h2>
-    <button @click="handleTyping">Type</button>
   </div>
 </template>
 

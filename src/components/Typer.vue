@@ -18,6 +18,9 @@ export default {
       typingStatus: false,
     };
   },
+  mounted() {
+    setTimeout(this.typing, 2000);
+  },
   methods: {
     animatePhrase() {
       let phrase = this.phrases[this.phraseIterator];
@@ -49,7 +52,7 @@ export default {
         this.titleRender = this.titleRender.split("");
         this.titleRender.splice(this.titleRender.length - 1, 1);
         this.titleRender = this.titleRender.join("");
-        setTimeout(this.erase, 30);
+        setTimeout(this.erase, 40);
       } else {
         this.typingStatus = false;
         setTimeout(() => {
@@ -84,5 +87,6 @@ span.cursor {
 }
 .typing {
   animation: none !important;
+  background: #41B883 !important;
 }
 </style>
