@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" width="25%" />
+    <img alt="Vue logo" src="./assets/logo.png" width="15%" />
     <h2 style="display: flex; flex-direction: column">
       Hi !
       <Typer
@@ -8,7 +8,8 @@
         :phrases="[
           'I love to create things with Vue',
           'Also with React',
-          'And sometimes with Python',
+          'And sometimes with Svelte...',
+          'Yes... I hate Angular.'
         ]"
       />
     </h2>
