@@ -1,7 +1,7 @@
 <template>
-  <span>
+  <span :style="textStyles">
     {{ titleRender }}
-    <span class="cursor" :class="[typingStatus ? 'typing' : '']">&nbsp;</span>
+    <span class="cursor" :class="[typingStatus ? 'typing' : '']" :style="{width: cursorWidth, background: typingStatus ? cursorActiveColor : (cursorDefaultColor) ? cursorDefaultColor : 'grey' }">&nbsp;</span>
   </span>
 </template>
 <script>
@@ -10,6 +10,23 @@ export default {
     phrases: {
       type: Array,
     },
+    textStyles:{
+      type: Object,
+      default: () => {
+        return {}
+      }
+    },
+    cursorWidth:{
+      type: String,
+      default: '3px'
+    },
+    cursorActiveColor:{
+      type: String,
+      default: '#41B883'
+    },
+    cursorDefaultColor:{
+      type: String
+    }
   },
   data() {
     return {
@@ -20,6 +37,9 @@ export default {
   },
   mounted() {
     setTimeout(this.typing, 2000);
+  },
+  computed: {
+    
   },
   methods: {
     animatePhrase() {
@@ -82,11 +102,9 @@ span.cursor {
   margin-left: 3px;
   width: 3px;
   line-height: 0.9em;
-  background-color: grey;
   animation: cursorBlink 0.8s infinite;
 }
 .typing {
   animation: none !important;
-  background: #41B883 !important;
 }
 </style>

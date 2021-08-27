@@ -11,6 +11,10 @@
           'And sometimes with Svelte...',
           'Yes... I hate Angular.'
         ]"
+        :text-styles="{color: '#000'}"
+        cursor-default-color="orange"
+        cursor-active-color="red"
+        cursor-width="3px"
       />
     </h2>
   </div>
